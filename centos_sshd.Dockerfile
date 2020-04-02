@@ -22,14 +22,28 @@ RUN  yum install -y openssh-server
 
 ##########################################################################
 # passwords 
-RUN echo "root:password" | chpasswd
+RUN echo "root:password" |
 
 
 EXPOSE 22
 CMD systemctl restart  sshd.service;
 RUN cat /etc/redhat-release
 
-# docker build  -t haierspi/centos_latest_sshd:v1 -f centos_sshd.Dockerfile .
+# docker build  -t haierspi/centos7_sshd:v1 -f centos_sshd.Dockerfile .
 
 
-# docker run --privileged -d --name centos_centos7 -v D:/Dev/Dev.Data/www:/home/webApps centos:centos7 /sbin/init
+# docker run --privileged -d --name centos_centos7_ssh -v D:/Dev/Dev.Data/www:/home/webApps haierspi/centos7_sshd:v1 /sbin/init
+# docker push  haierspi/centos7_sshd:v1
+
+# ln -s /etc/php-fpm.d/www.conf php-fpm-www.conf
+# ln -s /etc/php-fpm.d/www.conf php-fpm-www.conf
+
+
+# docker commit --author='HaierSpi <haierspi@qq.com>' centos_centos7_ssh haierspi/centos7_ssh_php72_swoole_sqlsr:v1
+# docker commit --author='HaierSpi <haierspi@qq.com>' centos7_nginx haierspi/centos7_ssh_nginx:v1
+
+
+
+
+# docker push  haierspi/centos7_ssh_php72_swoole_sqlsr:v1
+# docker push   haierspi/centos7_ssh_nginx:v1
